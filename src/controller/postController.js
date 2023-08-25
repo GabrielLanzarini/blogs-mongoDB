@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { findPosts, deletePost, addPost } = require("../service/blogService")
+const { findPosts, deletePost, addPost } = require("../service/postService")
 const jwtVerify = require("../middleware/jwtVerify")
 const post_router = Router()
 
@@ -10,7 +10,7 @@ post_router.post("/create/post/:blogId", jwtVerify, async (req, res) => {
         await addPost(blogId, title, desc)
         res.status(204).json({ message: "New post created" })
     } catch (err) {
-        console.log(err)
+        res.status(err.statusCode || 404).json({ message: err.message || "Internal server error" })
     }
 })
 post_router.delete("/delete/post/:postId/:blogId", jwtVerify, async (req, res) => {

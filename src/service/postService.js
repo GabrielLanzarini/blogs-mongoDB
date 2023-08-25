@@ -1,5 +1,6 @@
 const { ObjectId } = require("mongodb")
 const collectionBlog = require("../dbConnection")
+const CustomError = require("../helper/CustomError")
 
 const findPosts = async (userId, blogId) => {
     const blogs = await findBlogs(userId)
@@ -9,7 +10,11 @@ const findPosts = async (userId, blogId) => {
 const addPost = async (blogId, title, desc) => {
     const collection = collectionBlog()
     const newPost = { _id: new ObjectId(), title: title, desc: desc }
-    await collection.updateOne({ "blogs._id": new ObjectId(blogId) }, { $push: { "blogs.$.postagens": newPost } })
+    try {
+        await collection.updateOne({ "blogs._id": new ObjectId(blogId) }, { $push: { "blogs.$.postagens": newPost } })
+    } catch (error) {
+        throw new CustomError("Internal Server Error", 404)
+    }
 }
 
 const deletePost = async (userId, blogId, postId) => {
