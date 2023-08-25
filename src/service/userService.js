@@ -1,23 +1,33 @@
-const { collectionBlog } = require("../dbConnection")
+const { ObjectId } = require("mongodb")
+const collectionBlog = require("../dbConnection")
+const CustomError = require("../helper/CustomError")
+const { sign } = require("jsonwebtoken")
 
-export const insertNewUser = async (name, password) => {
-    const collection = collectionBlog()
+const collection = collectionBlog()
+
+const insertNewUser = async (name, password) => {
     await collection.insertOne({ name: name, password: password, blogs: [] })
 }
 
-export const findUser = async (id) => {
-    const collection = collectionBlog()
-    const documents = await collection.findOne({ _id: id })
+const findUser = async (id) => {
+    const documents = await collection.findOne({ _id: new ObjectId(id) })
     return documents
 }
 
-// const updatePasswordUser = async (id) => {
-//     const collection = collectionBlog()
-//     const documents = await collection.findOne({ _id: id })
-//     return documents
-// }
-
-export const deleteUser = async (id) => {
-    const collection = collectionBlog()
-    await collection.deleteOne({ _id: id })
+const findAllUsers = async () => {
+    const documents = await collection.find({}).toArray()
+    return documents
 }
+
+const loginUser = async (name, password) => {
+    const user = await collection.findOne({ name: name })
+    if (!user) throw new CustomError("User Not Found", 404)
+    if (user.password !== password) throw new CustomError("Incorrect Password", 401)
+    return sign({ userId: user._id }, process.env.SECRET, { expiresIn: 80000 })
+}
+
+const deleteUser = async (id) => {
+    await collection.deleteOne({ _id: new ObjectId(id) })
+}
+
+module.exports = { insertNewUser, findUser, deleteUser, findAllUsers, loginUser }

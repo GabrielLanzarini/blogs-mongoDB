@@ -1,6 +1,7 @@
 const { MongoClient, ServerApiVersion } = require("mongodb")
+require("dotenv").config()
 
-const uri = ""
+const uri = process.env.URI_MONGO
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -10,7 +11,9 @@ const client = new MongoClient(uri, {
     },
 })
 
-export const collectionBlog = () => {
+const collectionBlog = () => {
     const db = client.db()
     return db.collection("blogs")
 }
+
+module.exports = collectionBlog

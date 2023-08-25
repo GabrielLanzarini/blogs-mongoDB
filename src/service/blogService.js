@@ -1,29 +1,29 @@
-const { collectionBlog } = require("../dbConnection")
+const { ObjectId } = require("mongodb")
+const collectionBlog = require("../dbConnection")
+const { findUser } = require("./userService")
 
-const findBlog = async (name, blog) => {
-    const user = await findUser(name)
-    const blogFind = user.blogs.find((e) => e.name == blog)
-    console.log(blogFind)
-}
+const collection = collectionBlog()
 
-const findPost = async () => {
-    const collection = collectionBlog()
-    const documents = await collection.find({}).toArray()
-    console.log(documents)
+const findBlogs = async (userId) => {
+    const user = await findUser(userId)
+    return user.blogs
 }
 
-const addBlog = async (name, blog) => {
-    const collection = collectionBlog()
-    const blogWithId = { id: new ObjectId(), ...blog }
-    await collection.updateOne({ name: name }, { $push: { blogs: blogWithId } })
+const findAllBlogs = async () => {
+    const users = await collection.find().toArray()
+    return users.map((a) => a.blogs)
 }
 
-const addPost = async (blog, post) => {
-    const collection = collectionBlog()
-    const postWithId = { id: new ObjectId(), ...post }
-    await collection.updateOne({ "blogs.name": blog }, { $push: { "blogs.$.postagens": postWithId } })
+const addBlog = async (name, userId) => {
+    const blogWithId = { _id: new ObjectId(), name: name, postagens: [] }
+    await collection.findOneAndUpdate({ _id: new ObjectId(userId) }, { $push: { blogs: blogWithId } })
 }
-const deletePost = async (name) => {
-    const collection = collectionBlog()
-    await collection.deleteOne({ name: name })
+
+const deleteBlog = async (userId, blogId) => {
+    const blogs = await findBlogs(userId)
+    const index = blogs.findIndex((e) => e._id == blogId)
+    if (index >= 0) blogs.splice(index, 1)
+    await collection.updateOne({ "blogs._id": new ObjectId(blogId) }, { $set: { blogs: blogs } })
 }
+
+module.exports = { findBlogs, addBlog, deleteBlog, findAllBlogs }
