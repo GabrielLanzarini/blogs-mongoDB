@@ -19,17 +19,17 @@ post_router.delete("/delete/post/:postId/:blogId", jwtVerify, async (req, res) =
         await deletePost(userId, blogId, postId)
         res.status(204).json({ message: "Post deleted" })
     } catch (err) {
-        console.log(err)
+        res.status(404).json({ message: "Internal server Error" })
     }
 })
 
-post_router.get("/find/posts/:userId/:blogId", async (req, res) => {
-    const { userId, blogId } = req.params
+post_router.get("/find/posts/:userIdPost/:blogId", async (req, res) => {
+    const { userIdPost, blogId } = req.params
     try {
-        const blog = await findPosts(userId, blogId)
-        res.status(200).json({ blogs: "blog" })
+        const posts = await findPosts(userIdPost, blogId)
+        res.status(200).json({ posts })
     } catch (err) {
-        console.log(err)
+        res.status(err.statusCode || 404).json({ message: err.message || "Internal server Error" })
     }
 })
 

@@ -1,19 +1,21 @@
 const { ObjectId } = require("mongodb")
 const collectionBlog = require("../dbConnection")
 const CustomError = require("../helper/CustomError")
+const { findBlogs } = require("./blogService")
 
 const findPosts = async (userId, blogId) => {
     const blogs = await findBlogs(userId)
     const postagens = blogs.filter((e) => e._id == blogId)
+    if (postagens.length == 0) throw new CustomError("Posts not found", 404)
     return postagens[0].postagens
 }
 const addPost = async (blogId, title, desc) => {
     const collection = collectionBlog()
     const newPost = { _id: new ObjectId(), title: title, desc: desc }
     try {
-        await collection.updateOne({ "blogs._id": new ObjectId(blogId) }, { $push: { "blogs.$.postagens": newPost } })
+        await collection.findOneAndUpdate({ "blogs._id": new ObjectId(blogId) }, { $push: { "blogs.$.postagens": newPost } })
     } catch (error) {
-        throw new CustomError("Internal Server Error", 404)
+        throw new CustomError("Blog not found", 404)
     }
 }
 
