@@ -7,6 +7,7 @@ const user_router = Router()
 user_router.post("/create", async (req, res) => {
     const { first_name, last_name, username, password } = req.body
     console.log(first_name, last_name, username, password)
+    console.log(req.body)
     try {
         await insertNewUser(first_name, last_name, username, password)
         res.status(204).json({ message: "New user created" })
@@ -17,6 +18,7 @@ user_router.post("/create", async (req, res) => {
 
 user_router.post("/login", async (req, res) => {
     const { username, password } = req.body
+    console.log(username, password)
     try {
         const token = await loginUser(username, password)
         res.cookie("x-acess", token).status(200).json({ message: "Successful login" })

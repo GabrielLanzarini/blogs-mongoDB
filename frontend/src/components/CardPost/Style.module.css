@@ -1,0 +1,44 @@
+.pubCard {
+    width: 28rem;
+    height: 12rem;
+    border-radius: 10px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+}
+
+.pubCard button {
+    cursor: pointer;
+    width: 25%;
+    border-radius: 5px;
+    border: none;
+    background-color: #6246ea;
+    color: white;
+    height: 2rem;
+}
+
+.titles {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.titles h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ;
+}
+
+.pubCard span {
+    font-weight: bold;
+    color: #6246ea;
+    cursor: pointer;
+}
+
+.userReadContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
