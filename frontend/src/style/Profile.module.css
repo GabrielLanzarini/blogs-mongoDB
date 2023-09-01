@@ -1,0 +1,93 @@
+.primaryContainerExt {
+    width: 100vw;
+    min-height: calc(100vh - 5rem);
+    max-height: fit-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #eff0f3;
+    max-width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+.namesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.primaryContainer {
+    width: 90%;
+    border-radius: 15px;
+    background-color: white;
+    flex-grow: 1;
+}
+
+.infosContainerExt {
+    padding: 20px 40px 20px 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.textUsername {
+    font-weight: bold;
+    color: #6246ea;
+}
+
+.textUsername span {
+    font-weight: normal;
+}
+
+.userDateContainer {
+    display: flex;
+    gap: 1px;
+}
+
+.blogsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.blogsCardsPostsExt {
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.blogsCardsPosts {
+    justify-content: start;
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    height: 15rem;
+}
+
+.postsContainerExt {
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column;
+    background-color: #eff0f3;
+}
+
+.postsContainer {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.postsCardContainer {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.postsCardContainerExt {
+    flex-grow: 1;
+    padding: 120px;
+}

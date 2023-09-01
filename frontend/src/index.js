@@ -5,6 +5,9 @@ import "animate.css"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import Login from "./screens/Login"
 import Home from "./screens/Home"
+import Profile from "./screens/Profile"
+import Post from "./screens/Post"
+import Blog from "./screens/Blog"
 
 const router = createBrowserRouter([
     {
@@ -14,6 +17,18 @@ const router = createBrowserRouter([
     {
         path: "/home",
         element: <Home />,
+    },
+    {
+        path: "/home/profile/:id",
+        element: <Profile />,
+    },
+    {
+        path: "/home/post/:id",
+        element: <Post />,
+    },
+    {
+        path: "/home/blog/:id",
+        element: <Blog />,
     },
 ])
 

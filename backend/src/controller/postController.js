@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { findPosts, deletePost, addPost } = require("../service/postService")
+const { findPosts, deletePost, addPost, findAllPosts } = require("../service/postService")
 const jwtVerify = require("../middleware/jwtVerify")
 const post_router = Router()
 
@@ -27,7 +27,16 @@ post_router.get("/find/posts/:userIdPost/:blogId", async (req, res) => {
     const { userIdPost, blogId } = req.params
     try {
         const posts = await findPosts(userIdPost, blogId)
-        res.status(200).json({ posts })
+        res.status(200).json(posts)
+    } catch (err) {
+        res.status(err.statusCode || 404).json({ message: err.message || "Internal server Error" })
+    }
+})
+
+post_router.get("/findAll", async (req, res) => {
+    try {
+        const posts = await findAllPosts()
+        res.status(200).json(posts)
     } catch (err) {
         res.status(err.statusCode || 404).json({ message: err.message || "Internal server Error" })
     }

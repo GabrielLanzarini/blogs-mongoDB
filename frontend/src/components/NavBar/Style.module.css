@@ -1,0 +1,122 @@
+.navBar {
+    display: flex;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    width: 100%;
+    height: 5rem;
+    justify-content: center;
+}
+
+.searchInputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.searchInputContainer input {
+    padding: 0 1rem 0 1rem;
+    border-radius: 1rem;
+    width: 100%;
+    background-color: white;
+    border: none;
+    height: 3.5rem;
+    font-size: 1rem;
+}
+
+.searchInputContainer svg {
+    width: 1.5rem;
+    position: absolute;
+    right: 1rem;
+}
+
+.profileContainer {
+    position: absolute;
+    height: 100%;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.profileContainerInt {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.profileContainer p {
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.profileContainer svg {
+    margin-right: 0.5rem;
+    width: 2rem;
+}
+
+.profileImg {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    background-color: white;
+    border: solid 2px #6246ea;
+}
+
+.modal {
+    position: absolute;
+    top: 80px;
+    left: -6rem;
+    border-radius: 10px;
+    background-color: white;
+    width: 15rem;
+    box-shadow: 0 0 15px #00000030;
+}
+
+.modalInt {
+    padding: 10px;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modalOptContainer {
+    transition: all 0.2s;
+    cursor: pointer;
+    display: flex;
+    margin: 10px 0 10px 0;
+    align-items: center;
+}
+
+.modalOptContainer {
+    padding: 5px;
+    display: flex;
+}
+
+.modalOptContainer:hover {
+    color: white;
+    fill: white;
+    border-radius: 10px;
+    background-color: #6246ea;
+}
+
+.modalOptContainerLogout p {
+    color: rgb(224, 78, 78);
+}
+
+.modalOptContainerLogout svg {
+    color: rgb(224, 78, 78);
+}
+
+.modalOptContainerLogout:hover {
+    background-color: rgb(224, 78, 78);
+}
+
+.modalOptContainerLogout:hover p,
+.modalOptContainerLogout:hover svg {
+    color: white;
+}

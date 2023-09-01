@@ -10,6 +10,29 @@ input {
     outline: none;
 }
 
-h1 {
+* {
     color: #2b2c34;
+}
+
+body::-webkit-scrollbar {
+    width: 1rem; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: white; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #6246ea; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid white; /* creates padding around scroll thumb */
+}
+
+a {
+    text-decoration: none;
+}
+
+::selection {
+    color: white;
+    background-color: #6246ea;
 }

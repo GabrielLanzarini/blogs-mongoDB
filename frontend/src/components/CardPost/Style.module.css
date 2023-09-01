@@ -1,5 +1,5 @@
 .pubCard {
-    width: 28rem;
+    width: 80%;
     height: 12rem;
     border-radius: 10px;
     padding: 40px;
@@ -9,7 +9,16 @@
     background-color: white;
 }
 
-.pubCard button {
+.linkUser {
+    font-weight: bold;
+    color: #6246ea;
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     width: 25%;
     border-radius: 5px;
@@ -23,18 +32,13 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
+    min-width: 25rem;
 }
 
 .titles h2 {
     font-size: 1rem;
     font-weight: 600;
-    color: ;
-}
-
-.pubCard span {
-    font-weight: bold;
-    color: #6246ea;
-    cursor: pointer;
+    /* color: ; */
 }
 
 .userReadContainer {
